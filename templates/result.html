@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ДимАуг</title>
+		<link href="../static/style48.css" rel="stylesheet">
+	</head>
+	<body>
+	<div class="header">
+		Диминутивы и аугментативы
+	</div>
+	<div class="menu">
+		<div class="btn-group">
+			<a href="/index" class="button2">главная</a>
+			<a href="/search" class="button2">расширенный поиск</a>
+			<a class="button2">правила</a>
+			<a class="button2">тренажёры</a>
+		</div>
+	</div>
+	<div class="lexform">
+		<form action = "http://localhost:5000/result" method = "POST">
+			Слово <input type='text' name='lem'>
+			<input class='button' type='reset' value='Очистить'>
+			<input class='button' type='submit' value='Поиск'>
+		 </form>
+	</div>
+	<div class="main">
+		{% if lemma != '' %}
+			Результат для формы <i>{{ lemma }}</i>
+			<br>
+			{% if form == () %}
+				<h3>Форма не найдена</h3>
+			{% else %}
+				<br>
+				<table>
+					<th>Тип</th><th>Лексема</th><th>Суффикс</th><th>Значение суффикса</th>
+				{% for lemtype, lexeme, suffix, tag in form %}
+					<tr class='result'>
+						<td> {% if lemtype == 'd' %} диминутив {% else %} аугментатив {% endif %}</td>
+						<td> {{ lexeme }} </td>
+						<td> {{ suffix }} </td>
+						<td> {{ tag }} </td>
+					</tr>
+				{% endfor %}
+				</table>
+			{% endif %}
+		{% else %}
+			Формы от лексемы <i>{{ lexeme }}</i>
+			<br>
+			{% if dim == () and aug == () %}
+				<h3>Не найдено</h3>
+			{% endif %}
+			{% if dim != () %}
+				<br>Диминутивы:
+				<br><br>
+				<table>
+					<th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
+				{% for lemma, suffix, tag in dim %}
+					<tr class='result'>
+					   <td> {{ lemma }} </td>
+					   <td> {{ suffix }} </td>
+					   <td> {{ tag }} </td>
+					</tr>
+				{% endfor %}
+				</table>
+			{% endif %}
+			{% if aug != () %}
+				<br> Аугментативы:
+				<br><br>
+				<table>
+					<th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
+				{% for lemma, suffix, tag in aug %}
+					<tr class='result'>
+					   <td> {{ lemma }} </td>
+					   <td> {{ suffix }} </td>
+					   <td> {{ tag }} </td>
+					</tr>
+				{% endfor %}
+				</table>
+			{% endif %}
+		{% endif %}
+	</div>
+	</body>
+</html>
