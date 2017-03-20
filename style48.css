@@ -1,0 +1,130 @@
+body {
+		background: #FFFFFF;
+		font: 12pt Verdana, Geneva, Helvetica sans-serif;
+	}
+a:link {
+		color: white;
+		text-decoration: none;
+	}
+a:visited {
+		color: white;
+		text-decoration: none;
+	}
+a:hover {
+			background: #FFFFFF;
+			color: #000000;
+			} 
+h3 {
+			font-style: italic;
+			font-size: 11pt;
+			}
+.header {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			padding: 20px;
+			background: #9D738D;
+			font-size: 18pt;
+			color: white;
+			}
+.menu {
+			position: absolute;
+			left: 0px;
+			width: 100%;
+			background: #614870;
+			color: white;
+			top: 65px;
+			}
+.lexform {
+			position: absolute;
+			top: 120px;
+			left: 0px;
+			width: 100%;
+			padding: 20px 20px;
+			background: #D9C9D2;
+			height: 25px;
+			}
+.main {
+			position: absolute;
+			top: 190px;
+			left: 0px;
+			width: 100%;
+			padding: 20px 20px;
+			background: #D9C9D2;
+			}
+.button {
+	font-size: 12pt;
+	background-color: white;
+    border: 2px solid white;
+    color: black;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+	cursor: pointer;
+}
+.button:hover {
+    background-color: #614870;
+	border: 2px solid #614870;
+    color: white
+}
+.btn-group .button2 {
+    background-color: #614870;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+	float: left;
+}
+.btn-group .button2:hover {
+    background-color: #473056;
+}
+.btn-group .active {
+	border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #473056;
+	float: left;
+}
+input {
+	ackground-color: white;
+    border: 2px solid white;
+    color: black;
+	font-size: 12pt;
+    padding: 5px 10px;
+	}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+input[name='q'], input[name='text'] {
+	width: 150px;
+	}
+
+table {
+    width: 95%;
+	border-collapse: collapse;
+	border: none;
+	text-align: left;
+}
+td {
+	padding: 7px;
+	border-bottom: 1px solid white;
+	border-top: 1px solid white;
+}
+th {
+	padding: 7px;
+	font-size: 11pt;
+	border-bottom: 1px solid white;
+	border-top: 1px solid white;
+}
+.result:hover {
+    background-color: #614870;
+	color: white;
+}
