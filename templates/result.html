@@ -1,8 +1,27 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ДимАуг</title>
-		<link href="../static/style48.css" rel="stylesheet">
+		<title>ДимАуг результат поиска</title>
+		<link href="../static/style87.css" rel="stylesheet">
+		<script type="text/javascript">
+        window.addEventListener("DOMContentLoaded", function() {
+            var nodes = document.querySelectorAll(".result");
+            [].forEach.call(nodes, function(tr) {
+                var box = [],
+                    next = tr.nextElementSibling;
+                while (next && next.classList.contains("box")) {
+                    box.push(next);
+                    next = next.nextElementSibling
+                }
+                tr.cells[0].addEventListener("click", function() {
+                    box.forEach(function(item) {
+                        item.classList.toggle("show")
+                    });
+                    return false
+                })
+            })
+        });
+		</script>
 	</head>
 	<body>
 	<div class="header">
@@ -12,11 +31,11 @@
 		<div class="btn-group">
 			<a href="/index" class="button2">главная</a>
 			<a href="/search" class="button2">расширенный поиск</a>
-			<a class="button2">правила</a>
+			<a href="/rules" class="button2">правила</a>
 			<a class="button2">тренажёры</a>
 		</div>
 	</div>
-	<div class="lexform">
+	<div class="lemform">
 		<form action = "http://localhost:5000/result" method = "POST">
 			Слово <input type='text' name='lem'>
 			<input class='button' type='reset' value='Очистить'>
@@ -32,13 +51,17 @@
 			{% else %}
 				<br>
 				<table>
-					<th>Тип</th><th>Лексема</th><th>Суффикс</th><th>Значение суффикса</th>
-				{% for lemtype, lexeme, suffix, tag in form %}
+					<th></th><th>Тип</th><th>Лексема</th><th>Суффикс</th><th>Значение суффикса</th>
+				{% for lemtype, lexeme, suffix, tag, descr in form %}
 					<tr class='result'>
+						<td class='plus'><a href="#"> +</a></td>
 						<td> {% if lemtype == 'd' %} диминутив {% else %} аугментатив {% endif %}</td>
 						<td> {{ lexeme }} </td>
 						<td> {{ suffix }} </td>
 						<td> {{ tag }} </td>
+					</tr>
+					<tr class='box'>
+						<td colspan = "5"> {{ descr }} </td>
 					</tr>
 				{% endfor %}
 				</table>
@@ -53,12 +76,16 @@
 				<br>Диминутивы:
 				<br><br>
 				<table>
-					<th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
-				{% for lemma, suffix, tag in dim %}
+					<th></th><th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
+				{% for lemma, suffix, tag, descr in dim %}
 					<tr class='result'>
-					   <td> {{ lemma }} </td>
-					   <td> {{ suffix }} </td>
-					   <td> {{ tag }} </td>
+						<td class='plus'><a href="#"> +</a></td>
+						<td> {{ lemma }} </td>
+						<td> {{ suffix }} </td>
+						<td> {{ tag }} </td>
+					</tr>
+					<tr class='box'>
+						<td colspan = "5"> {{ descr }} </td>
 					</tr>
 				{% endfor %}
 				</table>
@@ -67,12 +94,16 @@
 				<br> Аугментативы:
 				<br><br>
 				<table>
-					<th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
-				{% for lemma, suffix, tag in aug %}
+					<th></th><th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
+				{% for lemma, suffix, tag, descr in aug %}
 					<tr class='result'>
-					   <td> {{ lemma }} </td>
-					   <td> {{ suffix }} </td>
-					   <td> {{ tag }} </td>
+						<td class='plus'><a href="#"> +</a></td>
+						<td> {{ lemma }} </td>
+						<td> {{ suffix }} </td>
+						<td> {{ tag }} </td>
+					</tr>
+					<tr class='box'>
+						<td colspan = "5"> {{ descr }} </td>
 					</tr>
 				{% endfor %}
 				</table>

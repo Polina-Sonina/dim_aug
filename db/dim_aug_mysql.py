@@ -16,13 +16,13 @@ def get_data(l):
     j = 0
     for i in range(len(l)):
         lem = l[i]
-        if lem[4] not in lexems:
+        if lem[5] not in lexems:
             j += 1
-            lexems.append(lem[4])
-            lemmas.append((lem[0], lem[1], lem[2], lem[3], j))
+            lexems.append(lem[5])
+            lemmas.append((lem[0], lem[1], lem[2], lem[3], lem[4], j))
         else:
-            lex_index = lexems.index(lem[4]) + 1
-            lemmas.append((lem[0], lem[1], lem[2], lem[3], lex_index))
+            lex_index = lexems.index(lem[5]) + 1
+            lemmas.append((lem[0], lem[1], lem[2], lem[3], lem[4], lex_index))
     return lexems, lemmas
 
 def create_db(dbname, schemafile):
@@ -47,7 +47,7 @@ def fill_db(dbname, lexemes, lemmas):
     with pymysql.connect(host='localhost',port=3306,user='root',passwd='4273',db=dbname,charset="utf8") as conn:
         print('filling database...')
         conn.executemany('insert into Lexeme(lexid, lex) values (null, %s)', lexemes)  
-        conn.executemany('insert into Lemma(lemid, lemtype, lem, suffix, tag, lexid) values (null, %s, %s, %s, %s, %s)', lemmas)    
+        conn.executemany('insert into Lemma(lemid, lemtype, lem, suffix, tag, descr, lexid) values (null, %s, %s, %s, %s, %s, %s)', lemmas)    
         conn.close()
         
 def query_db(dbname):
@@ -63,8 +63,8 @@ def query_db(dbname):
         print('--- Lemma:')
         conn.execute('select * from Lemma LIMIT 10;')
         for row in conn.fetchall():
-            lemid, lemtype, lem, suffix, tag, lexid = row
-            print(lemid, lemtype, lem, suffix, tag, lexid) 
+            lemid, lemtype, lem, suffix, tag, descr, lexid = row
+            print(lemid, lemtype, lem, suffix, tag, descr, lexid) 
             
         print('--- Lexeme - Lemma LIMIT 10:')
         conn.execute(
