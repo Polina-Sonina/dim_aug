@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>ДимАуг результат поиска</title>
-		<link href="../static/style2.css" rel="stylesheet">
+		<link href="../static/style.css" rel="stylesheet">
 		<script type="text/javascript">
         window.addEventListener("DOMContentLoaded", function() {
             var nodes = document.querySelectorAll(".result");
@@ -67,48 +67,97 @@
 				</table>
 			{% endif %}
 		{% else %}
-			Формы от лексемы <i>{{ lexeme }}</i>
-			<br>
-			{% if dim == () and aug == () %}
-				<h3>Не найдено</h3>
-			{% endif %}
-			{% if dim != () %}
-				<br>Диминутивы:
-				<br><br>
-				<table>
-					<th></th><th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
-				{% for lemma, suffix, tag, descr in dim %}
-					<tr class='result'>
-						<td class='plus'><a href="#"> +</a></td>
-						<td> {{ lemma }} </td>
-						<td> {{ suffix }} </td>
-						<td> {{ tag }} </td>
-					</tr>
-					<tr class='box'>
-						<td colspan = "5"> {{ descr }} </td>
-					</tr>
-				{% endfor %}
-				</table>
-			{% endif %}
-			{% if aug != () %}
-				<br> Аугментативы:
-				<br><br>
-				<table>
-					<th></th><th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
-				{% for lemma, suffix, tag, descr in aug %}
-					<tr class='result'>
-						<td class='plus'><a href="#"> +</a></td>
-						<td> {{ lemma }} </td>
-						<td> {{ suffix }} </td>
-						<td> {{ tag }} </td>
-					</tr>
-					<tr class='box'>
-						<td colspan = "5"> {{ descr }} </td>
-					</tr>
-				{% endfor %}
-				</table>
+			{% if lexeme == "" %}
+				Формы подходящие выбранным параметрам
+				<br>
+				{% if dim != () %}
+					<br>Диминутивы:
+					<br><br>
+					<table>
+						<th></th><th>Лемма</th><th>Лексема</th><th>Суффикс</th><th>Значение суффикса</th>
+					{% for lemma, lexeme, suffix, tag, descr in dim %}
+						<tr class='result'>
+							<td class='plus'><a href="#"> +</a></td>
+							<td> {{ lemma }} </td>
+							<td> {{ lexeme }} </td>
+							<td> {{ suffix }} </td>
+							<td> {{ tag }} </td>
+						</tr>
+						<tr class='box'>
+							<td colspan = "5"> {{ descr }} </td>
+						</tr>
+					{% endfor %}
+					</table>
+				{% endif %}
+				{% if aug != () %}
+					<br> Аугментативы:
+					<br><br>
+					<table>
+						<th></th><th>Лемма</th><th>Лексема</th><th>Суффикс</th><th>Значение суффикса</th>
+					{% for lemma, lexeme, suffix, tag, descr in aug %}
+						<tr class='result'>
+							<td class='plus'><a href="#"> +</a></td>
+							<td> {{ lemma }} </td>
+							<td> {{ lexeme }} </td>
+							<td> {{ suffix }} </td>
+							<td> {{ tag }} </td>
+						</tr>
+						<tr class='box'>
+							<td colspan = "5"> {{ descr }} </td>
+						</tr>
+					{% endfor %}
+					</table>
+				{% endif %}
+				<br>
+				{% if dim == () and aug == () %}
+					<h3>Не найдено</h3>
+				{% endif %}
+			{% else %}
+				Формы от лексемы <i>{{ lexeme }}</i>
+				<br>
+				{% if dim != () %}
+					<br>Диминутивы:
+					<br><br>
+					<table>
+						<th></th><th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
+					{% for lemma, lexeme, suffix, tag, descr in dim %}
+						<tr class='result'>
+							<td class='plus'><a href="#"> +</a></td>
+							<td> {{ lemma }} </td>
+							<td> {{ suffix }} </td>
+							<td> {{ tag }} </td>
+						</tr>
+						<tr class='box'>
+							<td colspan = "5"> {{ descr }} </td>
+						</tr>
+					{% endfor %}
+					</table>
+				{% endif %}
+				{% if aug != () %}
+					<br>Аугментативы:
+					<br><br>
+					<table>
+						<th></th><th>Лемма</th><th>Суффикс</th><th>Значение суффикса</th>
+					{% for lemma, lexeme, suffix, tag, descr in aug %}
+						<tr class='result'>
+							<td class='plus'><a href="#"> +</a></td>
+							<td> {{ lemma }} </td>
+							<td> {{ suffix }} </td>
+							<td> {{ tag }} </td>
+						</tr>
+						<tr class='box'>
+							<td colspan = "5"> {{ descr }} </td>
+						</tr>
+					{% endfor %}
+					</table>
+				{% endif %}
+				<br>
+				{% if dim == () and aug == () %}
+					<h3>Не найдено</h3>
+				{% endif %}
 			{% endif %}
 		{% endif %}
+	<br><br><i><a href = "https://github.com/SoDipole/dim_aug">Проект на GitHub</a></i>
 	</div>
 	</body>
 </html>

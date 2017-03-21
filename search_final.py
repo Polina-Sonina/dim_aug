@@ -33,7 +33,7 @@ def search_by_lem(dbname, lemma):
 
 def search_by_lex(dbname, lexeme, lemtype, suffix, suf_meaning):
     with pymysql.connect(host='localhost',port=3306,user='root',passwd='4273',db=dbname,charset="utf8") as conn:
-        sql = '''SELECT Lemma.lem, Lemma.suffix, Lemma.tag, Lemma.descr
+        sql = '''SELECT Lemma.lem, Lexeme.lex, Lemma.suffix, Lemma.tag, Lemma.descr
                     FROM Lemma
                     JOIN Lexeme ON Lexeme.lexid = Lemma.lexid
                     WHERE '''

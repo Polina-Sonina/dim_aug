@@ -1,7 +1,8 @@
-Aug + eval
-Cub
-Dim + Endear
-Diminutive
-Disdain
-Endearment
-Familiar
+оценка
+размер
+размер + оценка
+количество
+мощный
+количество + качество
+мощный + оценка
+размер + количество
