@@ -1,0 +1,160 @@
+html {
+		margin:0;
+		padding:0;
+}
+body {
+		margin:0;
+		padding:0;
+		background: #FFCCBB;
+		font: 12pt Verdana, Geneva, Helvetica sans-serif;
+	}
+a:link {
+		color: #291329;
+		text-decoration: none;
+	}
+a:visited {
+		color: #291329;
+		text-decoration: none;
+	}
+h3 {
+			font-style: italic;
+			font-size: 11pt;
+			}
+.header {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			padding: 19px 0px 19px 19px;
+			background: #FFCCBB;
+			font-size: 18pt;
+			color: #912591;
+			}
+.menu {
+			position: absolute;
+			width: 100%;
+			left: 0px;
+			padding: 0px;
+			background: #912591;
+			color: white;
+			top: 65px;
+			}
+.lemform {
+			position: absolute;
+			top: 120px;
+			left: 0px;
+			width: 100%;
+			padding: 20px 0px 20px 20px;
+			background: white;
+			height: 25px;
+			}
+.main {
+			position: absolute;
+			left: 0px;
+			top: 190px;
+			width: 100%;
+			padding: 10px 0px 20px 10px;
+			background: white;
+			}
+.button {
+	font-size: 12pt;
+	background-color: #FFCCBB;
+    border: 2px solid #FFCCBB;
+    color: #291329;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+	cursor: pointer;
+}
+.button:hover {
+    background-color: #912591;
+	border: 2px solid #912591;
+    color: white;
+}
+.btn-group .button2 {
+    background-color: #912591;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.btn-group .button2:hover {
+    background-color: #D33FD3;
+}
+.btn-group .active {
+	border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #D33FD3;
+}
+input {
+	background-color: #FFCCBB;
+    border: 2px solid #FFCCBB;
+    color: #291329;
+	font-size: 12pt;
+    padding: 5px 10px;
+	}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #FFCCBB inset;
+}
+input[name='q'], input[name='text'] {
+	width: 150px;
+	}
+table {
+    width: 90%;
+	border-collapse: collapse;
+	border: none;
+	text-align: left;
+}
+.tabrules {
+	border: 1px solid #FF9675;
+	text-align: left;
+	border-left: 1px solid #FF9675;
+	border-right: 1px solid #FF9675;
+}
+td {
+	padding: 7px;
+	border-bottom: 1px solid #FF9675;
+	border-top: 1px solid #FF9675;
+}
+th {
+	padding: 7px;
+	font-size: 11pt;
+	border-bottom: 1px solid #FF9675;
+	border-top: 1px solid #FF9675;
+}
+.result:hover{
+	background-color: #FFCCBB;
+	color: #291329;
+}
+.box {
+	display: none;
+	background-color: #FFCCBB;
+	color: #291329;
+}
+.box.show {
+	display: table-row;
+}
+.plus{
+	text-align: center;
+}
+.plus:hover{
+	cursor: pointer;
+}
+label:hover{
+	cursor: pointer;
+	white-space:nowrap;
+	display: inline-block;
+}
+hr{
+	border: 0;
+    height: 1px;
+    background: #FF9675;
+}
