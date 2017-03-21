@@ -80,7 +80,6 @@ def index():
 def search():
     suffixes_d = file_to_list('suffixes_d.txt')
     suf_meanings_d = file_to_list('suf_meanings_d.txt')
-    print(suf_meanings_d)
     suffixes_a = file_to_list('suffixes_a.txt')
     suf_meanings_a = file_to_list('suf_meanings_a.txt')
     return render_template('search.html', suffixes_d = suffixes_d, suf_meanings_d = suf_meanings_d,
@@ -97,7 +96,6 @@ def result():
         suffix = request.form.getlist('suffix')
         suf_meaning = request.form.getlist('suf_meaning')
         lemma = ''
-        print(result)
         if 'lem' in result:
             lemma = result['lem']
             form = search_by_lem(dbname, lemma)
