@@ -8,6 +8,8 @@ datafile = 'aug_dim_tab.txt'
 def file_to_list(file_name):
     fr = open(file_name, encoding = 'utf-8')
     l = [line.strip().split('\t') for line in fr]
+    l.sort(key = lambda line: line[1].lower())
+    l.sort(key = lambda line: line[5].lower())
     fr.close()
     return l
 
@@ -55,23 +57,23 @@ def query_db(dbname):
         print('querying database...')
 
         print('--- Lexeme:')
-        conn.execute('select * from Lexeme LIMIT 10;')
+        conn.execute('select * from Lexeme LIMIT 5;')
         for row in conn.fetchall():
             lexid, lex = row
             print(lexid, lex)
         
         print('--- Lemma:')
-        conn.execute('select * from Lemma LIMIT 10;')
+        conn.execute('select * from Lemma LIMIT 5;')
         for row in conn.fetchall():
             lemid, lemtype, lem, suffix, tag, descr, lexid = row
             print(lemid, lemtype, lem, suffix, tag, descr, lexid) 
             
-        print('--- Lexeme - Lemma LIMIT 10:')
+        print('--- Lexeme - Lemma:')
         conn.execute(
             '''select Lemma.lem, Lexeme.lex
                 from Lemma
                 natural join Lexeme
-                LIMIT 10;
+                 LIMIT 5;
                 ''')
         for row in conn.fetchall():
             lem, lex = row
@@ -79,14 +81,14 @@ def query_db(dbname):
 
         print('--- Lemma by Lexeme:')
         conn.execute(
-            '''SELECT Lemma.lem, Lemma.suffix, Lemma.tag, Lexeme.lex
+            '''SELECT Lemma.lem, Lexeme.lex
                 FROM Lemma
                 JOIN Lexeme ON Lexeme.lexid = Lemma.lexid
-                WHERE Lexeme.lex = "баба";
+                WHERE Lexeme.lex = "кот";
                 ''')
         for row in conn.fetchall():
-            lem, suffix, tag, lex = row
-            print(lex, lem, suffix, tag) 
+            lem, lex = row
+            print(lex, lem) 
         conn.close()
 
         
