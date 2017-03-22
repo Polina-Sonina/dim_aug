@@ -31,10 +31,8 @@ p {
 	top: 0px;
 	left: 0px;
 	width: 100%;
-	!background: #FFCCBB;
 	background: #E75B3E;
 	font-size: 16pt;
-	!color: #E75B3E;
 	color: white;
 	white-space:nowrap;
 }
@@ -201,11 +199,51 @@ th {
 	cursor: pointer;
 }
 label:hover{
-	cursor: pointer;
-	white-space:nowrap;
+	!cursor: pointer;
+	!white-space:nowrap;
 }
 hr{
 	border: 0;
     height: 1px;
     background: #FF9675;
+}
+.option {
+	white-space: nowrap;
+}
+
+.checkbox-custom, .radio-custom {
+    opacity: 0;
+    position: absolute;   
+}
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 3px;
+    cursor: pointer;
+}
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+    margin-right: 7px;
+    text-align: center;
+}
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    background: #FF7356;
+    box-shadow: inset 0px 0px 0px 4px #fff;
+}
+.radio-custom + .radio-custom-label:before {
+    border-radius: 50%;
+}
+.radio-custom:checked + .radio-custom-label:before {
+    background: #FF7356;
+    box-shadow: inset 0px 0px 0px 4px #fff;
 }

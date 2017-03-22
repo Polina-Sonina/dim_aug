@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>ДимАуг Поиск</title>
-		<link href="../static/style150.css" rel="stylesheet">
+		<link href="../static/style161.css" rel="stylesheet">
 	</head>
 	<body>
 	<div class="header">
@@ -33,33 +33,51 @@
 				<b>Лексема</b> <input type='text' name='lex'>
 				<br>
 				<br><b>найти только</b>
-				<label><input type='radio' name='lemtype' value='d'> диминутивы</label>
-				<label><input type='radio' name='lemtype' value='a'> аугментативы</label>
+					<span class="option">
+						<input type='radio' class="radio-custom" name='lemtype' value='d' id="radio-1"> 
+						<label for="radio-1" class="radio-custom-label">диминутивы</label>
+					</span>
+					<span class="option">
+						<input type='radio' class="radio-custom" name='lemtype' value='a' id="radio-2"> 
+						<label for="radio-2" class="radio-custom-label">аугментативы</label>
+					</span>
 				<br>
 				<hr>
 				<b>суффиксы диминутивов</b>
 				<br><br>
 				{% for suffix in suffixes_d %}
-				<label><input type='checkbox' name='suffix' value='{{ suffix }}'> {{ suffix }}</label>
+					<span class="option"> 
+						<input type='checkbox' class="checkbox-custom" name='suffix' value='{{ suffix }}' id='{{ suffix }}'>
+						<label for="{{ suffix }}" class="checkbox-custom-label">{{ suffix }}</label>
+					</span>
 				{% endfor %}
 				<br>
 				<br><b>суффиксы аугментативов</b>
 				<br><br>
 				{% for suffix in suffixes_a %}
-				<label><input type='checkbox' name='suffix' value='{{ suffix }}'> {{ suffix }}</label>
+					<span class="option"> 
+						<input type='checkbox' class="checkbox-custom" name='suffix' value='{{ suffix }}' id='{{ suffix }}'>
+						<label for="{{ suffix }}" class="checkbox-custom-label">{{ suffix }}</label>
+					</span>
 				{% endfor %}
 				<br>
 				<hr>
 				<b>значения суффиксов диминутивов</b>
 				<br><br>
 				{% for suf_meaning in suf_meanings_d %}
-				<label><input type='checkbox' name='suf_meaning' value='{{ suf_meaning }}'> {{ suf_meaning }}</label>
+					<span class="option"> 
+						<input type='checkbox' class="checkbox-custom" name='suf_meaning' value='{{ suf_meaning }}' id='{{ suf_meaning }}'> 
+						<label for='{{ suf_meaning }}' class="checkbox-custom-label">{{ suf_meaning }}</label>
+					</span>
 				{% endfor %}
 				<br>
 				<br><b>значения суффиксов аугментативов</b>
 				<br><br>
 				{% for suf_meaning in suf_meanings_a %}
-				<label><input type='checkbox' name='suf_meaning' value='{{ suf_meaning }}'> {{ suf_meaning }}</label>
+					<span class="option"> 
+						<input type='checkbox' class="checkbox-custom" name='suf_meaning' value='{{ suf_meaning }}' id='{{ suf_meaning }}'> 
+						<label for='{{ suf_meaning }}' class="checkbox-custom-label">{{ suf_meaning }}</label>
+					</span>
 				{% endfor %}
 				<br>
 				<hr>
