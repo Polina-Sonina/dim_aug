@@ -1,12 +1,16 @@
-import os
+import os, io
 import pymysql
 
 DBNAME = 'dim_aug'
 DBSCHEMA = 'dim_aug_schema.sql'
 datafile = 'aug_dim_tab.txt'
+DBHOST = 'localhost'
+DBUSER = 'root'
+DBPASSWD = 'mypassword'
+DBPORT = 3306
 
 def file_to_list(file_name):
-    fr = open(file_name, encoding = 'utf-8')
+    fr = io.open(file_name, encoding = 'utf-8')
     l = [line.strip().split('\t') for line in fr]
     l.sort(key = lambda line: line[1].lower())
     l.sort(key = lambda line: line[5].lower())
@@ -28,32 +32,30 @@ def get_data(l):
     return lexems, lemmas
 
 def create_db(dbname, schemafile):
-    print('create db:', dbname)
 
-    with pymysql.connect(host='localhost',port=3306,user='root',passwd='4273',db=dbname,charset="utf8") as conn:
-        conn.execute('DROP DATABASE IF EXISTS dim_aug;')
-        conn.execute('CREATE DATABASE IF NOT EXISTS dim_aug;')
+    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,charset="utf8",port=DBPORT) as conn:
+        conn.execute('DROP DATABASE IF EXISTS '+dbname+';')
+        conn.execute('CREATE DATABASE '+dbname+' DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;;')
         print('creating schema')
         schema = None
         with open(schemafile, 'rt') as f:
             schema = f.read()
-            
         if schema is not None:
-            conn.execute('USE dim_aug;')
+            conn.execute('USE  '+dbname+';')
             conn.execute(schema)
         print('schema created successfully')
         conn.close()
     return True
 
 def fill_db(dbname, lexemes, lemmas):
-    with pymysql.connect(host='localhost',port=3306,user='root',passwd='4273',db=dbname,charset="utf8") as conn:
+    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,db=dbname,charset="utf8",port=DBPORT) as conn:
         print('filling database...')
         conn.executemany('insert into Lexeme(lexid, lex) values (null, %s)', lexemes)  
         conn.executemany('insert into Lemma(lemid, lemtype, lem, suffix, tag, descr, lexid) values (null, %s, %s, %s, %s, %s, %s)', lemmas)    
         conn.close()
         
 def query_db(dbname):
-    with pymysql.connect(host='localhost',port=3306,user='root',passwd='4273',db=dbname,charset="utf8") as conn:
+    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,db=dbname,charset="utf8",port=DBPORT) as conn:
         print('querying database...')
 
         print('--- Lexeme:')
@@ -67,25 +69,7 @@ def query_db(dbname):
         for row in conn.fetchall():
             lemid, lemtype, lem, suffix, tag, descr, lexid = row
             print(lemid, lemtype, lem, suffix, tag, descr, lexid) 
-            
-        print('--- Lexeme - Lemma:')
-        conn.execute(
-            '''select Lemma.lem, Lexeme.lex
-                from Lemma
-                natural join Lexeme
-                 LIMIT 5;
-                ''')
-        for row in conn.fetchall():
-            lem, lex = row
-            print(lex, lem) 
 
-        print('--- Lemma by Lexeme:')
-        conn.execute(
-            '''SELECT Lemma.lem, Lexeme.lex
-                FROM Lemma
-                JOIN Lexeme ON Lexeme.lexid = Lemma.lexid
-                WHERE Lexeme.lex = "кот";
-                ''')
         for row in conn.fetchall():
             lem, lex = row
             print(lex, lem) 

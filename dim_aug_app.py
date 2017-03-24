@@ -1,17 +1,16 @@
 import os
-import pymysql
 from flask import Flask, render_template, request, flash, redirect
-from flaskext.mysql import MySQL
+import pymysql
 
-dbname = 'dim_aug'
+DBNAME = 'dim_aug'
+DBSCHEMA = 'dim_aug_schema.sql'
+datafile = 'aug_dim_tab.txt'
+DBHOST = 'localhost'
+DBUSER = 'root'
+DBPASSWD = 'mypassword'
+DBPORT = 3306
 
-mysql = MySQL()
 app = Flask(__name__)
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '4273'
-app.config['MYSQL_DATABASE_DB'] = dbname
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
 
 def file_to_list(file_name):
     fr = open(file_name, encoding = 'utf-8')
@@ -20,7 +19,7 @@ def file_to_list(file_name):
     return l
 
 def search_by_lem(dbname, lemma):
-    with pymysql.connect(host='localhost',port=3306,user='root',passwd='4273',db=dbname,charset="utf8") as conn:
+    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,charset="utf8",port=DBPORT) as conn:
         conn.execute(
             '''SELECT Lemma.lemtype, Lexeme.lex, Lemma.suffix, Lemma.tag, Lemma.descr
                 FROM Lemma
@@ -32,7 +31,7 @@ def search_by_lem(dbname, lemma):
         return form
 
 def search_by_lex(dbname, lexeme, lemtype, suffix, suf_meaning):
-    with pymysql.connect(host='localhost',port=3306,user='root',passwd='4273',db=dbname,charset="utf8") as conn:
+    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,charset="utf8",port=DBPORT) as conn:
         sql = '''SELECT Lemma.lem, Lexeme.lex, Lemma.suffix, Lemma.tag, Lemma.descr
                     FROM Lemma
                     JOIN Lexeme ON Lexeme.lexid = Lemma.lexid
@@ -91,7 +90,7 @@ def rules():
 
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
-   if request.method == 'POST':
+    if request.method == 'POST':
         result = request.form
         suffix = request.form.getlist('suffix')
         suf_meaning = request.form.getlist('suf_meaning')
