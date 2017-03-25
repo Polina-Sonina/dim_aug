@@ -7,19 +7,19 @@ DBSCHEMA = 'dim_aug_schema.sql'
 datafile = 'aug_dim_tab.txt'
 DBHOST = 'localhost'
 DBUSER = 'root'
-DBPASSWD = 'mypassword'
+DBPASSWD = 'password'
 DBPORT = 3306
 
 app = Flask(__name__)
 
 def file_to_list(file_name):
-    fr = open(file_name, encoding = 'utf-8')
-    l = [line.strip() for line in fr]
-    fr.close()
+    with app.open_resource(file_name) as fr:
+        l = [line.decode('utf-8').strip() for line in fr]
+        fr.close()
     return l
 
 def search_by_lem(dbname, lemma):
-    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,charset="utf8",port=DBPORT) as conn:
+    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,db=dbname,charset="utf8",port=DBPORT) as conn:
         conn.execute(
             '''SELECT Lemma.lemtype, Lexeme.lex, Lemma.suffix, Lemma.tag, Lemma.descr
                 FROM Lemma
@@ -31,7 +31,7 @@ def search_by_lem(dbname, lemma):
         return form
 
 def search_by_lex(dbname, lexeme, lemtype, suffix, suf_meaning):
-    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,charset="utf8",port=DBPORT) as conn:
+    with pymysql.connect(host=DBHOST,user=DBUSER,passwd=DBPASSWD,db=dbname,charset="utf8",port=DBPORT) as conn:
         sql = '''SELECT Lemma.lem, Lexeme.lex, Lemma.suffix, Lemma.tag, Lemma.descr
                     FROM Lemma
                     JOIN Lexeme ON Lexeme.lexid = Lemma.lexid
@@ -68,10 +68,6 @@ def search_by_lex(dbname, lexeme, lemtype, suffix, suf_meaning):
         return dim, aug
 
 @app.route('/')
-def root():
-    return redirect('/index')
-
-@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -97,15 +93,16 @@ def result():
         lemma = ''
         if 'lem' in result:
             lemma = result['lem']
-            form = search_by_lem(dbname, lemma)
+            form = search_by_lem(DBNAME, lemma)
             return render_template("result.html", lemma = lemma, form = form)
         else:
             lexeme = result['lex']
             lemtype = 'all'
             if 'lemtype' in result:
                 lemtype = result['lemtype']
-            dim, aug = search_by_lex(dbname, lexeme, lemtype, suffix, suf_meaning)
+            dim, aug = search_by_lex(DBNAME, lexeme, lemtype, suffix, suf_meaning)
             return render_template("result.html", lemma = lemma, lexeme = lexeme, dim = dim, aug = aug)  
  
 if __name__ == "__main__":
     app.run()
+

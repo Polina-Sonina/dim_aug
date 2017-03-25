@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ДимАуг Поиск</title>
-		<link href="../static/style161.css" rel="stylesheet">
+		<title>adcorpus Поиск</title>
+		<link href={{ url_for('static', filename='style.css') }} rel="stylesheet">
 	</head>
 	<body>
 	<div class="header">
@@ -12,15 +12,15 @@
 	</div>
 	<div class="menu">
 		<div class="btn-group">
-			<a href="/index" class="button2">главная</a>
-			<a href="/search" class="active">расширенный поиск</a>
-			<a href="/rules" class="button2">правила</a>
+			<a href={{ url_for('index') }} class="button2">главная</a>
+			<a href={{ url_for('search') }} class="active">расширенный поиск</a>
+			<a href={{ url_for('rules') }} class="button2">правила</a>
 			<a class="button2">тренажёры</a>
 		</div>
 	</div>
 	<div class="lemform">
 		<div class="content">
-			<form action = "/result" method = "POST">
+			<form action = {{ url_for('result') }} method = "POST">
 				Поиск по форме слова: <input type='text' name='lem'>
 				<input class='button' type='reset' value='Очистить'>
 				<input class='button' type='submit' value='Поиск'>
@@ -29,7 +29,7 @@
 	</div>
 	<div class="main">
 		<div class="content">
-			<form action = "/result" method = "POST">
+			<form action = {{ url_for('result') }} method = "POST">
 				<b>Лексема</b> <input type='text' name='lex'>
 				<br>
 				<br><b>найти только</b>

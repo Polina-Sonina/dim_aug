@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ДимАуг Правила</title>
-		<link href="../static/style161.css" rel="stylesheet">
+		<title>adcorpus Правила</title>
+		<link href={{ url_for('static', filename='style.css') }} rel="stylesheet">
 		<script type="text/javascript">
 			// When the user scrolls down 20px from the top of the document, show the button
 			window.onscroll = function() {scrollFunction()};
@@ -28,9 +28,9 @@
 	</div>
 	<div class="menu">
 		<div class="btn-group">
-			<a href="/index" class="button2">главная</a>
-			<a href="/search" class="button2">расширенный поиск</a>
-			<a href="/rules" class="active">правила</a>
+			<a href={{ url_for('index') }} class="button2">главная</a>
+			<a href={{ url_for('search') }} class="button2">расширенный поиск</a>
+			<a href={{ url_for('rules') }} class="active">правила</a>
 			<a class="button2">тренажёры</a>
 		</div>
 	</div>
