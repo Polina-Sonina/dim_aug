@@ -6,7 +6,7 @@ DBSCHEMA = 'dim_aug_schema.sql'
 datafile = 'aug_dim_tab.txt'
 DBHOST = 'localhost'
 DBUSER = 'root'
-DBPASSWD = '4273'
+DBPASSWD = 'password'
 DBPORT = 3306
 
 def file_to_list(file_name):

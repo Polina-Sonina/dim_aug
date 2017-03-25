@@ -13,8 +13,10 @@ DBPORT = 3306
 app = Flask(__name__)
 
 def file_to_list(file_name):
-    with app.open_resource(file_name) as fr:
-        l = [line.decode('utf-8').strip() for line in fr]
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    file_url = os.path.join(SITE_ROOT, 'static', file_name)    
+    with open(file_url, encoding='utf-8') as fr:
+        l = [line.strip() for line in fr]
         fr.close()
     return l
 
