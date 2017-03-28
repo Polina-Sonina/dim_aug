@@ -3,8 +3,6 @@ from flask import Flask, render_template, request, flash, redirect
 import pymysql
 
 DBNAME = 'dim_aug'
-DBSCHEMA = 'dim_aug_schema.sql'
-datafile = 'aug_dim_tab.txt'
 DBHOST = 'localhost'
 DBUSER = 'root'
 DBPASSWD = 'password'
@@ -86,20 +84,26 @@ def search():
 def rules():
     return render_template('rules.html')
 
+@app.route('/exercises')
+def exercises():
+    return render_template('exercises.html')
+
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
     if request.method == 'POST':
         result = request.form
-        suffix = request.form.getlist('suffix')
-        suf_meaning = request.form.getlist('suf_meaning')
         lemma = ''
         if 'lem' in result:
             lemma = result['lem']
             form = search_by_lem(DBNAME, lemma)
+            if form == ():
+                lemma = ' '
             return render_template("result.html", lemma = lemma, form = form)
         else:
             lexeme = result['lex']
             lemtype = 'all'
+            suffix = request.form.getlist('suffix')
+            suf_meaning = request.form.getlist('suf_meaning')            
             if 'lemtype' in result:
                 lemtype = result['lemtype']
             dim, aug = search_by_lex(DBNAME, lexeme, lemtype, suffix, suf_meaning)

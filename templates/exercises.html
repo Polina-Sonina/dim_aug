@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>adcorpus Тренажёры</title>
+		<link href={{ url_for('static', filename='style1.css') }} rel="stylesheet">
+	</head>
+	<body>
+	<div class="header">
+		<div class="content">
+			<b>Диминутивчики и аугментативищи</b>
+		</div>
+	</div>
+	<div class="menu">
+		<div class="btn-group">
+			<a href={{ url_for('index') }} class="button2">главная</a>
+			<a href={{ url_for('search') }} class="button2">расширенный поиск</a>
+			<a href={{ url_for('rules') }} class="button2">правила</a>
+			<a href={{ url_for('exercises') }} class="active">тренажёры</a>
+		</div>
+	</div>
+	<div class="lemform">
+		<div class="content">
+			<a href="https://moodlecloud.com/en/" class="button_nav" target="_blank">тренажёры на MOODLE.COM</a>
+		</div>
+	</div>
+	<div class="main">
+		<div class="content">
+			<h2>Инструкция для входа на сайт тренажеров</h2>
+				<p>1)	Пройдите по ссылке сверху.</p>
+				<br>
+				<p>2)	В правом верхнем углу нажмите на «log in».</p>
+				<br>
+				<p>3)	Введите следующие данные:</p>
+				<div class="content">
+					<p><i>Логин:</i> letsgo2</p>
+					<p><i>Пароль:</i> hserki</p>
+				</div>
+				<p>4)	Вы попали на портал «Поехали2». Далее пройдите по следующей ссылке:</p>
+					<br><img src={{ url_for('static', filename='instr1.png') }} alt="insruction screenshot" style="width:600px">
+				<br><br><p>5)	Перейдите в раздел «Поехали II. Том 2»</p>
+					<br><img src={{ url_for('static', filename='instr2.png') }} alt="insruction screenshot" style="width:500px">
+				<br><p>6)	Перед вами список тренажеров по различным темам. В конце страницы вы увидите раздел: «Диминутивы и аугментативы». Он содержит различные типы заданий на данную тему.</p>
+				<br><p>7)	Нажмите на любое понравившееся задание и приступайте к его выполнению, нажав: «Continue the last attempt». Обратите внимание, что перед каждым заданием дано его краткое описание и пример выполнения, если требуется.</p>
+				<h3>Желаем удачи!</h3>
+			<br>
+		</div>
+	</div>
+	</body>
+</html>

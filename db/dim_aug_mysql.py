@@ -12,7 +12,6 @@ DBPORT = 3306
 def file_to_list(file_name):
     fr = io.open(file_name, encoding = 'utf-8')
     l = [line.strip().split('\t') for line in fr]
-    print(l[0][1])
     l.sort(key = lambda line: line[1].lower())
     l.sort(key = lambda line: line[5].lower())
     fr.close()

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>adcorpus результат поиска</title>
-		<link href={{ url_for('static', filename='style.css') }} rel="stylesheet">
+		<link href={{ url_for('static', filename='style1.css') }} rel="stylesheet">
 		<script type="text/javascript">
         window.addEventListener("DOMContentLoaded", function() {
             var nodes = document.querySelectorAll(".result");
@@ -35,7 +35,7 @@
 			<a href={{ url_for('index') }} class="button2">главная</a>
 			<a href={{ url_for('search') }} class="button2">расширенный поиск</a>
 			<a href={{ url_for('rules') }} class="button2">правила</a>
-			<a class="button2">тренажёры</a>
+			<a href={{ url_for('exercises') }} class="button2">тренажёры</a>
 		</div>
 	</div>
 	<div class="lemform">
@@ -63,8 +63,8 @@
 							<td class='plus'><a href="#"> +</a></td>
 							<td> {% if lemtype == 'd' %} диминутив {% else %} аугментатив {% endif %}</td>
 							<td> {{ lexeme }} </td>
-							<td> {{ suffix }} </td>
-							<td> {{ tag }} </td>
+							<td> {{ suffix.replace('*','') }} </td>
+							<td> {{ tag.replace('*','') }} </td>
 						</tr>
 						<tr class='box'>
 							<td colspan = "5"> {% autoescape off %}{{ descr }}{% endautoescape %} </td>
@@ -86,7 +86,7 @@
 								<td class='plus'><a href="#"> +</a></td>
 								<td> {{ lemma }} </td>
 								<td> {{ lexeme }} </td>
-								<td> {{ suffix }} </td>
+								<td> {{ suffix.replace('*','') }} </td>
 								<td> {{ tag }} </td>
 							</tr>
 							<tr class='box'>
@@ -106,7 +106,7 @@
 								<td> {{ lemma }} </td>
 								<td> {{ lexeme }} </td>
 								<td> {{ suffix }} </td>
-								<td> {{ tag }} </td>
+								<td> {{ tag.replace('*','') }} </td>
 							</tr>
 							<tr class='box'>
 								<td colspan = "5"> {% autoescape off %}{{ descr }}{% endautoescape %} </td>
@@ -130,7 +130,7 @@
 							<tr class='result'>
 								<td class='plus'><a href="#"> +</a></td>
 								<td> {{ lemma }} </td>
-								<td> {{ suffix }} </td>
+								<td> {{ suffix.replace('*','') }} </td>
 								<td> {{ tag }} </td>
 							</tr>
 							<tr class='box'>
@@ -149,7 +149,7 @@
 								<td class='plus'><a href="#"> +</a></td>
 								<td> {{ lemma }} </td>
 								<td> {{ suffix }} </td>
-								<td> {{ tag }} </td>
+								<td> {{ tag.replace('*','') }} </td>
 							</tr>
 							<tr class='box'>
 								<td colspan = "5"> {% autoescape off %}{{ descr }}{% endautoescape %} </td>

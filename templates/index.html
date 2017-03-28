@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>adcorpus</title>
-		<link href={{ url_for('static', filename='style.css') }} rel="stylesheet">
+		<link href={{ url_for('static', filename='style1.css') }} rel="stylesheet">
 	</head>
 	<body>
 	<div class="header">
@@ -15,7 +15,7 @@
 			<a href={{ url_for('index') }} class="active">главная</a>
 			<a href={{ url_for('search') }} class="button2">расширенный поиск</a>
 			<a href={{ url_for('rules') }} class="button2">правила</a>
-			<a class="button2">тренажёры</a>
+			<a href={{ url_for('exercises') }} class="button2">тренажёры</a>
 		</div>
 	</div>
 	<div class="lemform">
